@@ -20,7 +20,7 @@ void solve(){
 	for(int a=1;a<=n;a++)
 		for(int i=1;i<=3;i++)
 			for(int j=1;j<=3;j++)
-				dp[a][i][j] = min( dp[a-1][i][i^j]+t[i][j]+dp[a-1][i^j][j] , 2*dp[a-1][i][j]+t[i][i^j]+dp[a-1][j][i]+t[i^j][j]);
+				dp[a][i][j] = min(dp[a-1][i][i^j]+t[i][j]+dp[a-1][i^j][j] , 2*dp[a-1][i][j]+t[i][i^j]+dp[a-1][j][i]+t[i^j][j]);
 }
 
 void output(){
