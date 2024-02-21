@@ -1,23 +1,6 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
-
-bool check(vector<int>& a) {
-    int n = a.size();
-    for (int i = 0; i < n; ++i) {
-        int sum_odd = 0, sum_even = 0;
-        for (int j = i; j < n; j += 2) {
-            sum_odd += a[j];
-            if (j + 1 < n) {
-                sum_even += a[j + 1];
-            }
-            if (sum_odd == sum_even) {
-                return true;
-            }
-        }
-    }
-    return false;
-}
+using ll = long long;
 
 int main() {
     int t;
@@ -25,12 +8,27 @@ int main() {
     while (t--) {
         int n;
         cin >> n;
-        vector<int> a(n);
+        vector<ll> a(n);
         for (int i = 0; i < n; i++) {
             cin >> a[i];
         }
-        bool ans = check(a);
-        cout << (ans ? "YES" : "NO") << endl;
+        map<ll, ll> m;
+        m[0] = 1;
+        ll s = 0;
+        bool found = false;
+        for (int i = 0; i < n; i++) {
+            a[i] *= ((i % 2) ? -1 : 1);
+            s += a[i];
+            if (m[s]) {
+                cout << "YES\n";
+                found = true;
+                break; 
+            }
+            m[s]++;
+        }
+        if (!found) {
+            cout << "NO\n";
+        }
     }
     return 0;
 }

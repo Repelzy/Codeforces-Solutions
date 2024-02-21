@@ -1,32 +1,31 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <map>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
-    int t;
-    cin >> t;
-    while(t--) {
-        int n;
-        cin >> n;
-        vector<pair<int, bool>> pos(2*n);
-        for(int i = 0; i < n; i++) {
-            cin >> pos[i*2].first >> pos[i*2+1].first;
-            pos[i*2].second = true; // starting position
-            pos[i*2+1].second = false; // ending position
-        }
-
-        sort(pos.begin(), pos.end());
-
-        int cnt = 0, greetings = 0;
-        for(auto p : pos) {
-            if(p.second) cnt++;
-            else greetings += cnt-1;
-        }
-
-        cout << greetings << "\n";
-    }
-
-    return 0;
+int main(){
+	int t;  cin >> t;
+	while(t--){
+		int n;  cin >>n;
+		map<int, int> mp;
+		vector<int> v(n);
+		for(int i = 0 ; i < n ; i++){
+			int a, b;   cin >> a >> b;
+			mp[a] = b;
+			v[i] = b;
+		}
+		sort(v.begin(), v.end());
+		
+		long long ans = 0;
+		for(auto& it : mp){
+			auto pos = lower_bound(v.begin(), v.end(), it.second);
+			
+			ans += pos - v.begin();
+			v.erase(pos);
+		}
+		
+		cout << ans << "\n";
+	}
 }
